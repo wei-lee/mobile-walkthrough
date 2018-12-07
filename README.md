@@ -1,2 +1,3 @@
-# walkthrough-template
-A template that can be used to boostrap new walkthroughs
+# Walkthrough Template
+
+A template that can be used to bootstrap new walkthroughs. Walkthrough content goes under `/walkthroughs`.
