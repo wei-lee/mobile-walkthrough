@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "repos": [],
+    "serviceInstances": [
+      {
+        "metadata": { "name": "mobile-developer-console" },
+        "spec": {
+          "clusterServiceClassExternalName": "ag-mdc-mdc-server-apb",
+          "clusterServicePlanExternalName": "default"
+        }
+      }
+    ]
+  }
+}

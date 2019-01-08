@@ -1,0 +1,14 @@
+= Template Walkthrough
+
+This will provision the mobile developer console.
+
+
+
+[time=5]
+== Task
+
+link:{route-mdc-server-host}[Console URL].
+
+=== Step
+
+// Add steps to your task
