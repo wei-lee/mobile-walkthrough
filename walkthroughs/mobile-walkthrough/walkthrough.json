@@ -13,7 +13,12 @@
         "metadata": { "name": "ag-metrics-apb" },
         "spec": {
           "clusterServiceClassExternalName": "ag-metrics-apb",
-          "clusterServicePlanExternalName": "default"
+          "clusterServicePlanExternalName": "default",
+          "parameters": {
+            "GRAFANA_STORAGE_SIZE": 10,
+            "PROMETHEUS_STORAGE_SIZE": 10,
+            "POSTGRES_STORAGE_SIZE": 10
+          }
         }
       },
       {
