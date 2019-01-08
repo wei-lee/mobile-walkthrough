@@ -8,6 +8,20 @@
           "clusterServiceClassExternalName": "ag-mdc-mdc-server-apb",
           "clusterServicePlanExternalName": "default"
         }
+      },
+      {
+        "metadata": { "name": "ag-metrics-apb" },
+        "spec": {
+          "clusterServiceClassExternalName": "ag-metrics-apb",
+          "clusterServicePlanExternalName": "default"
+        }
+      },
+      {
+        "metadata": { "name": "ag-unifiedpush-apb" },
+        "spec": {
+          "clusterServiceClassExternalName": "ag-unifiedpush-apb",
+          "clusterServicePlanExternalName": "default"
+        }
       }
     ]
   }
