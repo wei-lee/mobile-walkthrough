@@ -1,14 +1,57 @@
-= Template Walkthrough
+= Mobile Walkthrough
 
-This will provision the mobile developer console.
-
-
+In this walkthrough, we will try provision some of the mobile services, create a mobile app, and connect the app to the services.
 
 [time=5]
-== Task
+== Explore the Mobile Developer Console
 
-link:{route-mdc-server-host}[Console URL].
+Here will looks at the new mobile developer console and see what you can do with it.
 
-=== Step
+=== Steps
 
-// Add steps to your task
+1. Go to link:{route-mdc-server-host}[Console URL].
+2. Create an app
+3. Go to the `mobile services` tab and try bind some of the services to the app.
+4. When the binding is completed, go to the `Configure` view and check the content of the `mobile-services.json` file.
+
+[time=5]
+== Deploy a new sync app
+
+Here we will deploy a new sync app
+
+=== Steps
+
+1. Go to openshift console of your project.
+2. Clieck on `Browse Catalog`, and go to the `Mobile` tab, and select the sync app.
+3. Use the following parameters when creating the app.
+4. Wait for the app to be deployed.
+5. Go to the app's url, and try the graphql playground tab.
+6. Go to the developer console, check the mobile services tab again. Bind the app to the sync app.
+7. Check the `mobile-services.json` file getting updated.
+
+[time=10]
+== Run the sync client app
+
+=== Steps
+
+1. Clone the sync client app locally.
+2. Follow the instructions, copy the `mobile-services.json` file to the client app.
+3. Start the app. Go to your browser and view the app. Try create a task.
+4. Open the app again in a new incognito tab, and try create tasks in both tabs.
+
+
+[time=10]
+== Protect the sync app by Keycloak
+
+The sync server app is not protected at the moment, let's bind it with Keycloak and protect the endpoints.
+
+=== Steps
+
+1. Go to the project on Openshift, find `Keycloak` in the "Provisioned Services" section, and create a new binding.
+2. In the dialog, enter the name of the sync app as the client id, and choose "public" type. Create the binding.
+3. Wait for it to be completed, then go to secrets view and find the newly created secret. Add the secret to the sync app, and mount it to a location. Note it will be mounted as a directory to the pod.
+4. Update the "KEYCLOAK_CONFIG" environment variable of the sync server app to point it to the "config" file inside the mounted secret directory. Add the NODE_TLS_REJECT_UNAUTHORIZED=0 env var if self signed cert is used.
+5. Try the client app again, you will get an error now because you are not logged in.
+6. Check out <this branch> of the client app, build it and run it again. When you start it, you will need to login. To get it work, we need to configure keycloak first.
+7. Go to keycloak admin, find the realm that is matching the openshift namespace, and the client is that created by the binding. In the settings tab, add a new valid redirect url. In the roles tab, and a new role. Create a new user, set a password, and assign a new role to the user.
+8. Go back to the app and try login. New you should be able to creat tasks again.

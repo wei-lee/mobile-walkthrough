@@ -37,7 +37,7 @@
             "DATABASE_SERVICE_NAME":"postgresql",
             "MEMORY_LIMIT":"512Mi",
             "NAMESPACE":"openshift",
-            "POSTGRESQL_DATABASE":"tasks",
+            "POSTGRESQL_DATABASE":"postgres",
             "POSTGRESQL_PASSWORD":"postgres",
             "POSTGRESQL_USER":"postgres",
             "POSTGRESQL_VERSION":"9.6",
