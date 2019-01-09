@@ -2,14 +2,28 @@
 
 In this walkthrough, we will try provision some of the mobile services, create a mobile app, and connect the app to the services.
 
+[type=walkthroughResource,serviceName=Mobile Developer Console]
+.Mobile Developer Console
+****
+* link:{route-mdc-server-host}[Mobile Developer Console, window="_blank"]
+****
+
+[type=walkthroughResource,serviceName=OpenShift Project]
+.OpenShift Project
+****
+* link:{openshift-host}/console/project/{walkthrough-namespace}/overview[OpenShift Project]
+****
+
+
+
 [time=5]
 == Explore the Mobile Developer Console
 
-Here will looks at the new mobile developer console and see what you can do with it.
+
 
 === Steps
 
-1. Go to link:{route-mdc-server-host}[Console URL].
+1. Go to link:{route-mdc-server-host}[Mobile Developer Console, window="_blank"].
 2. Create an app
 3. Go to the `mobile services` tab and try bind some of the services to the app.
 4. When the binding is completed, go to the `Configure` view and check the content of the `mobile-services.json` file.
@@ -38,6 +52,13 @@ Here we will deploy a new sync app
 2. Follow the instructions, copy the `mobile-services.json` file to the client app.
 3. Start the app. Go to your browser and view the app. Try create a task.
 4. Open the app again in a new incognito tab, and try create tasks in both tabs.
+
+[time=10]
+== Check the auditlogs and metrics
+
+Check the Grafana graph and the audit logs for sync.
+
+=== Steps
 
 
 [time=10]

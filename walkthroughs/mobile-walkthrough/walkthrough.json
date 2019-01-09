@@ -10,6 +10,13 @@
         }
       },
       {
+        "metadata": { "name": "mobile-idm-service" },
+        "spec": {
+          "clusterServiceClassExternalName": "ag-keycloak-apb",
+          "clusterServicePlanExternalName": "default"
+        }
+      },
+      {
         "metadata": { "name": "ag-metrics-apb" },
         "spec": {
           "clusterServiceClassExternalName": "ag-metrics-apb",
