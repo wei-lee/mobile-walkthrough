@@ -2,13 +2,13 @@
 
 In this walkthrough, we will try provision some of the mobile services, create a mobile app, and connect the app to the services.
 
-[type=walkthroughResource,serviceName=Mobile Developer Console]
+[type=walkthroughResource]
 .Mobile Developer Console
 ****
 * link:{route-mdc-server-host}[Mobile Developer Console, window="_blank"]
 ****
 
-[type=walkthroughResource,serviceName=OpenShift Project]
+[type=walkthroughResource, serviceName=openshift]
 .OpenShift Project
 ****
 * link:{openshift-host}/console/project/{walkthrough-namespace}/overview[OpenShift Project]
