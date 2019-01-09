@@ -91,27 +91,35 @@ and try execute them. Feel free to explore the schema and add more queries and m
 [time=10]
 == Run the sync client app
 
-=== Steps
+In the previous task, we deployed the sync backend server, now let's run the sync client app and connect it to the backend.
 
-1. Clone the sync client app locally.
-2. Follow the instructions, copy the `mobile-services.json` file to the client app.
-3. Start the app. Go to your browser and view the app. Try create a task.
-4. Open the app again in a new incognito tab, and try create tasks in both tabs.
-
-[time=10]
-== Check the auditlogs and metrics
-
-Check the Grafana graph and the audit logs for sync.
+NOTE: You need to make sure you have `nodejs` installed locally.
 
 === Steps
 
+. Clone the link:{https://github.com/aerogear/apollo-voyager-ionic-example}[Sync Example App, window="_blank"] to your local machine.
+. Cd into the app, and run `npm install`
+. Open `src/mobile-services.js` file in a editor, and replace the value for `config` with the content from `mobile-services.json` file in the Mobile Developer Console.
+. Start the app by running `npm run start`, it will open a browser tab automatically. Try create some tasks.
+. Open the app again in a new incognito tab, and try create tasks in both.
 
 [time=10]
-== Protect the sync app by Keycloak
+== [Optional] Check the audit logs and metrics
+
+You can use the OpenShift logging feature and the metrics service to get insights about the mobile services.
+
+=== Steps
+
+//TODO: add the steps for this.
+
+[time=10]
+== [Optional] Protect the sync app by Keycloak
 
 The sync server app is not protected at the moment, let's bind it with Keycloak and protect the endpoints.
 
 === Steps
+
+//TODO: review the steps
 
 1. Go to the project on Openshift, find `Keycloak` in the "Provisioned Services" section, and create a new binding.
 2. In the dialog, enter the name of the sync app as the client id, and choose "public" type. Create the binding.
