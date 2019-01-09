@@ -51,7 +51,7 @@ Let's try it out.
 === Steps
 
 . Go the link:{openshift-host}/console/project/{walkthrough-namespace}/catalog[Service Catalog, window="_blank"] page of the OpenShift project, and click on the `Mobile` tab and choose `Sync App`.
-. Use the following configurations for the sync app, and leave the rest empty:
+. Use the following configurations for the sync server, and leave the rest empty:
 .. Sync Application Docker image: `docker.io/weilee/sync-server-example-app`
 .. Sync Application health endpoint: `health`
 .. Sync App Port: `4000`
@@ -65,6 +65,7 @@ Let's try it out.
 . Try out the link:{route-sync-app-host}/graphql[GraphQL playground, window="_blank"].
 . Paste in the following query/mutation into the text edit:
 +
+.Sample GraphQL Queries
 ----
 query listTasks {
   allTasks {
