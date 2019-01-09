@@ -2,23 +2,26 @@
 
 In this walkthrough, we will deploy some mobile services, and run an app that can talk to these services.
 
-[type=walkthroughResource]
-.Mobile Developer Console
-****
-* link:{route-mdc-server-host}[Mobile Developer Console, window="_blank"]
-****
-
 [type=walkthroughResource, serviceName=openshift]
 .OpenShift Project
 ****
-* link:{openshift-host}/console/project/{walkthrough-namespace}/overview[OpenShift Project]
+* link:{openshift-host}/console/project/{walkthrough-namespace}/overview[OpenShift Project, window="_blank"]
 ****
+
+
+[type=walkthroughResource, serviceName=openshift]
+.OpenShift Service Catalog
+****
+* link:{openshift-host}/console/project/{walkthrough-namespace}/catalog[OpenShift Service Catalog, window="_blank"]
+****
+
 
 [type=walkthroughResource]
 .Mobile Developer Console
 ****
 * link:{route-mdc-server-host}[Mobile Developer Console, window="_blank"]
 ****
+
 
 [time=5]
 == Explore the Mobile Developer Console
@@ -30,24 +33,59 @@ The Mobile Developer Console is where mobile developers can view avaiable mobile
 . Go to link:{route-mdc-server-host}[Mobile Developer Console, window="_blank"], and you can login with your OpenShift credential.
 . There should be no apps initially. Click on the `Create Mobile App` button to create a new app. Let's call it `demo`.
 . When the app is created, click on it and it will bring you to the configure page. On the left hand side, you will see the instructions to add the SDKs to your client app. On the right hand side you will see the content of the configuration file to add to a client app. There should be no services listed in the configuration file.
-4. Go to the `Mobile Services` tab, and you should see there are a few services listed in the `Unbound Services` section.
-5. Bind the `Mobile Metrics` and `Identity Management` services to the app by clicking on the "Bind To App" buttons. Use the default binding options, and once the bindings are completed, you will see them in the `Bound Services` section. 
-6. Now to back to the `Configuration` tab again, you will see the `mobile-services.json` file is updated with information about the bound services.
+. Go to the `Mobile Services` tab, and you should see there are a few services listed in the `Unbound Services` section.
+. Bind the `Mobile Metrics` and `Identity Management` services to the app by clicking on the "Bind To App" buttons. Use the default binding options, and once the bindings are completed, you will see them in the `Bound Services` section. 
+. Now to back to the `Configuration` tab again, you will see the `mobile-services.json` file is updated with information about the bound services. If you expand the row for each service, you will see the links to each of the service. Feel free to click on the links and explore the dashboard for each of the service.
 
 [time=5]
-== Deploy a new sync app
+== Deploy a new sync backend server
 
-Here we will deploy a new sync app
+As part of the mobile services product, we also provide a set of libaries that will allow developers to easily create mobile apps that can sync data to the their backend. The libaries are based on the popular Apollo GraphQL server, with the following additional functionalities:
+
+. Offline Support
+. Conflict Resolution
+. Easy integration with other mobile services
+
+Let's try it out.
 
 === Steps
 
-1. Go to openshift console of your project.
-2. Clieck on `Browse Catalog`, and go to the `Mobile` tab, and select the sync app.
-3. Use the following parameters when creating the app.
-4. Wait for the app to be deployed.
-5. Go to the app's url, and try the graphql playground tab.
-6. Go to the developer console, check the mobile services tab again. Bind the app to the sync app.
-7. Check the `mobile-services.json` file getting updated.
+. Go the link:{openshift-host}/console/project/{walkthrough-namespace}/catalog[Service Catalog, window="_blank"] page of the OpenShift project, and click on the `Mobile` tab and choose `Sync App`.
+. Use the following configurations for the sync app, and leave the rest empty:
+.. Sync Application Docker image: `docker.io/weilee/sync-server-example-app`
+.. Sync Application health endpoint: `health`
+.. Sync App Port: `4000`
+.. Sync App GraphQL Endpoint: `graphql`
+.. SQL Server Hostname: `postgresql`
+.. SQL Server Port: `5432`
+.. SQL Server Username: `postgres`
+.. SQL Server Password: `postgres`
+.. Database name: `postgres`
+. Do not bind the service to any app yet. Complete the wizard and wait for the service to be deployed.
+. Try out the link:{route-sync-app-host}/graphql[GraphQL playground, window="_blank"].
+. Paste in the following query/mutation into the text edit:
++
+----
+query listTasks {
+  allTasks {
+    title,
+    description,
+    id
+  }
+}
+
+mutation createTask {
+  createTask(title: "complete the walkthrough", description: "complete the mobile walk through") {
+    title,
+    description,
+    version,
+    id
+  }
+}
+----
++
+and try execute them. Feel free to explore the schema and add more queries and mutations.
+. Go to link:{route-mdc-server-host}[Mobile Developer Console, window="_blank"] again, create a new app called `todoapp`, and bind the app to the newly created sync server.
 
 [time=10]
 == Run the sync client app
