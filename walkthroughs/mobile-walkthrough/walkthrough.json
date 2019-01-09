@@ -13,7 +13,11 @@
         "metadata": { "name": "mobile-idm-service" },
         "spec": {
           "clusterServiceClassExternalName": "ag-keycloak-apb",
-          "clusterServicePlanExternalName": "default"
+          "clusterServicePlanExternalName": "default",
+          "parameters": {
+            "ADMIN_USERNAME": "admin",
+            "ADMIN_PASSWORD": "admin"
+          }
         }
       },
       {
