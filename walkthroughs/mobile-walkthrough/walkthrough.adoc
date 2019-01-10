@@ -137,10 +137,10 @@ The sync server app is not protected at the moment, let's bind it with Keycloak 
 . Now to go the link:{route-sync-app-host}/graphql[GraphQL playground, window="_blank"] we have opened previously, and try execute the queries again. This time they should not work because you are not logged in.
 . Check out <this branch> of the client app, build it and run it again. When you start it, you will need to login. However, we don't have any users created yet, so let's do that:
 .. Go to the link:{route-keycloak-host}/auth/admin/[IDM Admin page, window="_blank"], and login as the admin user (you can use `admin/admin` as the username and password). 
-.. On the top left, select the realm that is matching the Openshift project, then select `Clients` on the left menu. 
-.. There should be a client called `sync-app-public` created. Select it.
-... Go to `Roles` tab, and add the following roles: `read` and `write`.
-.. Then select `Users` on the left menu, and click on `View all users`. You will see there are no users in this realm. Click on `Add user` to create new ones. Pick a username you like and save.
+//.. On the top left, select the realm that is matching the Openshift project, then select `Clients` on the left menu. 
+//.. There should be a client called `sync-app-public` created. Select it.
+//... Go to `Roles` tab, and add the following roles: `read` and `write`.
+.. Select `Users` on the left menu, and click on `View all users`. You will see there are no users in this realm. Click on `Add user` to create new ones. Pick a username you like and save.
 .. Go to `Credentials` tab and set a password for the user. Set `Temporary` option to `OFF`.
-.. Then go to `Role Mappings` tab, and in the dropdowns for `Client Roles`, select the `sync-app-public` client. You should see the `read` and `write` roles in the `Available Roles` list. Add them to `Assigned Roles`.
+//.. Then go to `Role Mappings` tab, and in the dropdowns for `Client Roles`, select the `sync-app-public` client. You should see the `read` and `write` roles in the `Available Roles` list. Add them to `Assigned Roles`.
 . Now the user is created, you can use this user to login from the client app.
