@@ -113,20 +113,34 @@ You can use the OpenShift logging feature and the metrics service to get insight
 
 //TODO: add the steps for this.
 
-[time=10]
+[time=15]
 == [Optional] Protect the sync app by Keycloak
 
 The sync server app is not protected at the moment, let's bind it with Keycloak and protect the endpoints.
 
 === Steps
 
-//TODO: review the steps
-
-1. Go to the project on Openshift, find `Keycloak` in the "Provisioned Services" section, and create a new binding.
-2. In the dialog, enter the name of the sync app as the client id, and choose "public" type. Create the binding.
-3. Wait for it to be completed, then go to secrets view and find the newly created secret. Add the secret to the sync app, and mount it to a location. Note it will be mounted as a directory to the pod.
-4. Update the "KEYCLOAK_CONFIG" environment variable of the sync server app to point it to the "config" file inside the mounted secret directory. Add the NODE_TLS_REJECT_UNAUTHORIZED=0 env var if self signed cert is used.
-5. Try the client app again, you will get an error now because you are not logged in.
-6. Check out <this branch> of the client app, build it and run it again. When you start it, you will need to login. To get it work, we need to configure keycloak first.
-7. Go to keycloak admin, find the realm that is matching the openshift namespace, and the client is that created by the binding. In the settings tab, add a new valid redirect url. In the roles tab, and a new role. Create a new user, set a password, and assign a new role to the user.
-8. Go back to the app and try login. New you should be able to creat tasks again.
+. Go to the link:{openshift-host}/console/project/{walkthrough-namespace}/overview[OpenShift conosle, window="_blank"], find `Identity Management` in the "Provisioned Services" section, and click on "Create Binding".
+. Use the following configurations for the binding parameters:
+.. Mobile client ID/Service ID: `sync-app`
+.. Keycloak client type: `public`
+. Once the binding is created, we can mount the secret that is being created to the sync app: 
+.. Click on the `View Secret` link of the created binding
+.. In the secret's view, click on `Add To Application`
+.. Select `sync-app` as the target application
+.. Add secret as `Volume` and set the mount path to `/tmp/keycloak`
+. Update the `sync-app` to use the mounted secret:
+.. Go to the link:{openshift-host}/console/project/{walkthrough-namespace}browse/dc/sync-app?tab=environment[Environment view] of the sync app, and the following new environment variables and save.
+.. Name: `KEYCLOAK_CONFIG`, Value: `/tmp/keycloak/config`
+.. Name: `NODE_TLS_REJECT_UNAUTHORIZED`, Value: `0`
+. Wait for the sync app to be redeploy and starts up.
+. Now to go the link:{route-sync-app-host}/graphql[GraphQL playground, window="_blank"] we have opened previously, and try execute the queries again. This time they should not work because you are not logged in.
+. Check out <this branch> of the client app, build it and run it again. When you start it, you will need to login. However, we don't have any users created yet, so let's do that:
+.. Go to the link:{route-keycloak-host}/auth/admin/[IDM Admin page, window="_blank"], and login as the admin user (you can use `admin/admin` as the username and password). 
+.. On the top left, select the realm that is matching the Openshift project, then select `Clients` on the left menu. 
+.. There should be a client called `sync-app-public` created. Select it.
+... Go to `Roles` tab, and add the following roles: `read` and `write`.
+.. Then select `Users` on the left menu, and click on `View all users`. You will see there are no users in this realm. Click on `Add user` to create new ones. Pick a username you like and save.
+.. Go to `Credentials` tab and set a password for the user. Set `Temporary` option to `OFF`.
+.. Then go to `Role Mappings` tab, and in the dropdowns for `Client Roles`, select the `sync-app-public` client. You should see the `read` and `write` roles in the `Available Roles` list. Add them to `Assigned Roles`.
+. Now the user is created, you can use this user to login from the client app.
