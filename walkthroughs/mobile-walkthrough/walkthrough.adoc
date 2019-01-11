@@ -123,7 +123,7 @@ The sync server app is not protected at the moment, let's bind it with Keycloak 
 . Go to the link:{openshift-host}/console/project/{walkthrough-namespace}/overview[OpenShift conosle, window="_blank"], find `Identity Management` in the "Provisioned Services" section, and click on "Create Binding".
 . Use the following configurations for the binding parameters:
 .. Mobile client ID/Service ID: `sync-app`
-.. Keycloak client type: `public`
+.. Keycloak client type: `bearer`
 . Once the binding is created, we can mount the secret that is being created to the sync app: 
 .. Click on the `View Secret` link of the created binding
 .. In the secret's view, click on `Add To Application`
@@ -134,13 +134,9 @@ The sync server app is not protected at the moment, let's bind it with Keycloak 
 .. Name: `KEYCLOAK_CONFIG`, Value: `/tmp/keycloak/config`
 .. Name: `NODE_TLS_REJECT_UNAUTHORIZED`, Value: `0`
 . Wait for the sync app to be redeploy and starts up.
-. Now to go the link:{route-sync-app-host}/graphql[GraphQL playground, window="_blank"] we have opened previously, and try execute the queries again. This time they should not work because you are not logged in.
-. Check out <this branch> of the client app, build it and run it again. When you start it, you will need to login. However, we don't have any users created yet, so let's do that:
-.. Go to the link:{route-keycloak-host}/auth/admin/[IDM Admin page, window="_blank"], and login as the admin user (you can use `admin/admin` as the username and password). 
-//.. On the top left, select the realm that is matching the Openshift project, then select `Clients` on the left menu. 
-//.. There should be a client called `sync-app-public` created. Select it.
-//... Go to `Roles` tab, and add the following roles: `read` and `write`.
+. Now to go the link:{route-sync-app-host}/graphql[GraphQL playground, window="_blank"] we have opened previously and refresh the page. This time you should get an `Access Denied` error. This is because the endpoint is now protected by Keycloak and requires user authentication.
+. Check out the `auth` branch of the sync client app, build it and run it again. When you start it, you will be redirected to a login page. However, we don't have any users created yet, so let's do that:
+.. Go to the link:{route-keycloak-host}/auth/admin/[IDM Admin page, window="_blank"], and login as the admin user (you can use `admin/admin` as the username and password).
 .. Select `Users` on the left menu, and click on `View all users`. You will see there are no users in this realm. Click on `Add user` to create new ones. Pick a username you like and save.
 .. Go to `Credentials` tab and set a password for the user. Set `Temporary` option to `OFF`.
-//.. Then go to `Role Mappings` tab, and in the dropdowns for `Client Roles`, select the `sync-app-public` client. You should see the `read` and `write` roles in the `Available Roles` list. Add them to `Assigned Roles`.
-. Now the user is created, you can use this user to login from the client app.
+. Now the user is created, you can use this user to login from the client app. Try it and you should be able to view the tasks that are created previously, and create new ones again.
