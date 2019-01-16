@@ -30,13 +30,13 @@ The Mobile Developer Console is where mobile developers can view avaiable mobile
 
 === Steps
 
-. Go to the link:{openshift-host}/console/project/{walkthrough-namespace}/overview[OpenShift project overview page] and wait for all the services to be deployed and running.
+. Go to the link:{openshift-host}/console/project/{walkthrough-namespace}/overview[OpenShift project overview page, window="_blank"] and wait for all the services to be deployed and running.
 . Go to link:{route-mdc-server-host}[Mobile Developer Console, window="_blank"], and you can login with your OpenShift credential.
 . There should be no apps initially. Click on the `Create Mobile App` button to create a new app. Let's call it `demo`.
 . When the app is created, click on it and it will bring you to the configure page. On the left hand side, you will see the instructions to add the SDKs to your client app. On the right hand side you will see the content of the configuration file to add to a client app. There should be no services listed in the configuration file.
 . Go to the `Mobile Services` tab, and you should see there are a few services listed in the `Unbound Services` section.
 . Bind the `Mobile Metrics` and `Identity Management` services to the app by clicking on the "Bind To App" buttons. Use the default binding options, and once the bindings are completed, you will see them in the `Bound Services` section. 
-. Now to back to the `Configuration` tab again, you will see the `mobile-services.json` file is updated with information about the bound services. If you expand the row for each service, you will see the links to each of the service. Feel free to click on the links and explore the dashboard for each of the service.
+. Now go back to the `Configuration` tab again, you will see the `mobile-services.json` file is updated with information about the bound services. If you expand the row for each service, you will see the links to each of the service. Feel free to click on the links and explore the dashboard for each of the service.
 
 [time=5]
 == Deploy a new sync backend server
