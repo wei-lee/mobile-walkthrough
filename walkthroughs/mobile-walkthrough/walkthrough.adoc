@@ -1,3 +1,5 @@
+:sync-example-app-link: https://github.com/aerogear/apollo-voyager-ionic-example
+
 = Mobile Walkthrough
 
 In this walkthrough, we will deploy some mobile services, and run an app that can talk to these services.
@@ -100,7 +102,7 @@ NOTE: You need to make sure you have `nodejs` installed locally.
 === Steps
 
 . Go to link:{route-mdc-server-host}[Mobile Developer Console, window="_blank"] again, create a new app called `todoapp`, and bind the app to the newly created sync server. Make sure the `mobile-services.json` file is updated.
-. Clone the link:{https://github.com/aerogear/apollo-voyager-ionic-example}[Sync Example App, window="_blank"] to your local machine.
+. Clone the link:{sync-example-app-link}[Sync Example App, window="_blank"] to your local machine.
 . Cd into the app, and run `npm install`
 . Open `src/mobile-services.js` file in a editor, and replace the value for `config` with the content from `mobile-services.json` file in the Mobile Developer Console.
 . Start the app by running `npm run start`, it will open a browser tab automatically. Try create some tasks.
