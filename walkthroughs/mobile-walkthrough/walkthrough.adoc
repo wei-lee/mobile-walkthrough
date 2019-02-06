@@ -1,4 +1,4 @@
-:sync-example-app-link: https://github.com/aerogear/apollo-voyager-ionic-example
+:sync-example-app-link: https://github.com/aerogear/ionic-showcase
 
 = Mobile Walkthrough
 
@@ -56,7 +56,7 @@ Let's try it out.
 . Go the link:{openshift-host}/console/project/{walkthrough-namespace}/catalog[Service Catalog, window="_blank"] page of the OpenShift project, and click on the `Mobile` tab and choose `Sync App`.
 . Use the following configurations for the sync server, and leave the rest empty:
 .. Sync Application Name: `syncserver`
-.. Sync Application Docker image: `docker.io/aerogear/sync-server-example`
+.. Sync Application Docker image: `docker.io/aerogear/voyager-server-example-task`
 .. Sync Application health endpoint: `health`
 .. Sync Application Metrics endpoint: `/metrics`
 .. Sync App Port: `4000`
