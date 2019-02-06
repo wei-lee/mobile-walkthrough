@@ -12,7 +12,7 @@
       {
         "metadata": { "name": "mobile-idm-service" },
         "spec": {
-          "clusterServiceClassExternalName": "ag-keycloak-apb",
+          "clusterServiceClassExternalName": "ag-keycloak-keycloak-apb",
           "clusterServicePlanExternalName": "default",
           "parameters": {
             "ADMIN_USERNAME": "admin",
@@ -23,7 +23,7 @@
       {
         "metadata": { "name": "ag-metrics-apb" },
         "spec": {
-          "clusterServiceClassExternalName": "ag-metrics-apb",
+          "clusterServiceClassExternalName": "ag-metrics-metrics-apb",
           "clusterServicePlanExternalName": "default",
           "parameters": {
             "GRAFANA_STORAGE_SIZE": 10,
@@ -35,7 +35,7 @@
       {
         "metadata": { "name": "ag-unifiedpush-apb" },
         "spec": {
-          "clusterServiceClassExternalName": "ag-unifiedpush-apb",
+          "clusterServiceClassExternalName": "ag-push-unifiedpush-apb",
           "clusterServicePlanExternalName": "default"
         }
       },
